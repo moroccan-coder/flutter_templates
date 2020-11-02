@@ -41,23 +41,114 @@ class _Profile1State extends State<Profile1> {
               elevation: 0,
               centerTitle: true,
             ),
-          ),
-          CustomPaint(
-            painter: ProfilePainter(),
-            child:Container(),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.32,
-            left: MediaQuery.of(context).size.width * 0.04,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: ExactAssetImage('assets/shared/yss.jpg'),
+
+            body: Stack(
+              children: [
+                CustomPaint(
+                  painter: ProfilePainter(),
+                  child:Container(
+
+                  ),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.22,
+                  left: MediaQuery.of(context).size.width * 0.04,
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: ExactAssetImage('assets/shared/yss.jpg'),
+                  ),
+                ),
+                Positioned(
+                    top: MediaQuery.of(context).size.height * 0.34,
+                    right: 16,
+                    left: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(profile1.user.name,style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                        SizedBox(height: 8,),
+                        Row(children: [
+                          Icon(Icons.location_on,color: Colors.grey.shade400,size: 20,),
+                          Text(profile1.user.address),
+                        ],),
+                        SizedBox(height: 32),
+                        Text("ABOUT ME",style: TextStyle(
+                          color: Colors.grey.shade400,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                        SizedBox(height: 16,),
+                        Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(profile1.user.about,style: TextStyle(
+                              color: Colors.grey.shade800,
+                              fontSize: 16,
+                              height: 1.3,
+                              wordSpacing: 1.2,
+                            ),)),
+
+                      ],
+                    )),
+                Positioned(
+                    bottom: 20,
+                    left: 16,
+                    right: 16,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text("FOLLOWERS",style: _textStyle(),),
+                            SizedBox(height: 4,),
+                            Text(profile1.fllowers.toString(),style: _counterBotomStyle,),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("FOLLOWING",style: _textStyle(),),
+                            SizedBox(height: 4,),
+                            Text(profile1.fllowing.toString(),style: _counterBotomStyle),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("FRIENDS",style: _textStyle(),),
+                            SizedBox(height: 4,),
+                            Text(profile1.friends.toString(),style: _counterBotomStyle),
+                          ],
+                        ),
+                      ],
+                    )
+
+                ),
+
+              ],
             ),
+
           ),
+
         ],
       ),
     );
   }
+
+
+  TextStyle _textStyle(){
+    return TextStyle(
+      color: Colors.grey.shade500,
+    );
+  }
+
+
+  TextStyle _counterBotomStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+      color: Colors.grey.shade700
+  );
 }
 
 class ProfilePainter extends CustomPainter {
@@ -66,8 +157,8 @@ class ProfilePainter extends CustomPainter {
     Path path = Path();
     Paint paint = Paint();
     paint.color = Colors.white;
-    path.lineTo(0, size.height * 0.36);
-    path.lineTo(size.width, size.height * 0.43);
+    path.lineTo(0, size.height * 0.30);
+    path.lineTo(size.width, size.height * 0.38);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
 
@@ -80,4 +171,7 @@ class ProfilePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
+
+
+
 }
