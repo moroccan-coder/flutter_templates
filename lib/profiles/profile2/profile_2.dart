@@ -14,6 +14,25 @@ class Profile2 extends StatefulWidget {
 class _Profile2State extends State<Profile2> {
   Profile profile = ProfileProvider.getProfile();
 
+  List<String> _contactsPic = [
+    "assets/shared/persons/pers1.jpg",
+    "assets/shared/persons/pers2.jpg",
+    "assets/shared/persons/pers3.jpg",
+    "assets/shared/persons/pers4.jpg",
+    "assets/shared/persons/pers5.jpg",
+    "assets/shared/persons/pers6.jpg",
+    "assets/shared/persons/pers7.jpg",
+    "assets/shared/persons/pers8.jpg",
+    "assets/shared/persons/pers9.jpg",
+    "assets/shared/persons/pers10.jpg",
+    "assets/shared/persons/pers11.jpg",
+    "assets/shared/persons/pers12.jpg",
+    "assets/shared/persons/pers13.jpg",
+    "assets/shared/persons/pers14.jpg",
+    "assets/shared/persons/pers15.jpg",
+    "assets/shared/persons/pers16.jpg",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -26,10 +45,7 @@ class _Profile2State extends State<Profile2> {
             "assets/profiles/back_bg2.jpg",
             fit: BoxFit.fill,
             width: double.infinity,
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.44,
+            height: MediaQuery.of(context).size.height * 0.44,
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
@@ -55,10 +71,7 @@ class _Profile2State extends State<Profile2> {
 
   Widget _profileTitle(BuildContext context) {
     return Positioned(
-        top: MediaQuery
-            .of(context)
-            .size
-            .height * 0.02,
+        top: MediaQuery.of(context).size.height * 0.02,
         left: 0,
         right: 0,
         child: Column(
@@ -102,10 +115,7 @@ class _Profile2State extends State<Profile2> {
 
   Widget _bodyContent(BuildContext context) {
     return Positioned(
-        top: MediaQuery
-            .of(context)
-            .size
-            .height * 0.32,
+        top: MediaQuery.of(context).size.height * 0.32,
         left: 0,
         right: 0,
         bottom: 0,
@@ -114,28 +124,25 @@ class _Profile2State extends State<Profile2> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _counters(context),
                 _divider(),
                 ..._aboutMe(),
+                _friends(),
+                _contacts(context),
               ],
             ),
           ),
         ));
   }
 
-
   TextStyle _textStyle = TextStyle(
     color: Colors.grey.shade500,
   );
 
-  TextStyle _counterNumersStyle()
-  {
-    return TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 18,
-        color: Colors.grey.shade700
-    );
+  TextStyle _counterNumersStyle() {
+    return TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.grey.shade700);
   }
 
   Widget _counters(BuildContext context) {
@@ -144,22 +151,40 @@ class _Profile2State extends State<Profile2> {
       children: [
         Column(
           children: [
-            Text("FOLLOWERS", style: _textStyle,),
-            SizedBox(height: 4,),
-            Text(profile.followers.toString(), style: _counterNumersStyle(),),
+            Text(
+              "FOLLOWERS",
+              style: _textStyle,
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              profile.followers.toString(),
+              style: _counterNumersStyle(),
+            ),
           ],
         ),
         Column(
           children: [
-            Text("FOLLOWING", style: _textStyle,),
-            SizedBox(height: 4,),
+            Text(
+              "FOLLOWING",
+              style: _textStyle,
+            ),
+            SizedBox(
+              height: 4,
+            ),
             Text(profile.following.toString(), style: _counterNumersStyle()),
           ],
         ),
         Column(
           children: [
-            Text("FRIENDS", style: _textStyle,),
-            SizedBox(height: 4,),
+            Text(
+              "FRIENDS",
+              style: _textStyle,
+            ),
+            SizedBox(
+              height: 4,
+            ),
             Text(profile.friends.toString(), style: _counterNumersStyle()),
           ],
         ),
@@ -175,9 +200,50 @@ class _Profile2State extends State<Profile2> {
     );
   }
 
-  List<Widget>_aboutMe() {
+  List<Widget> _aboutMe() {
+    return [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+        child: Text("ABOUT ME",
+            style: TextStyle(
+              color: Colors.grey.shade700,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Text(profile.user.about,style: TextStyle(
+          fontSize: 16,color: Colors.grey.shade700
+        ),),
+      ),
 
+    ];
+  }
+  Widget _friends(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
+      child: Text('FRIENDS(${profile.friends.toString()})',style: TextStyle(
+        color: Colors.grey.shade700,
+        fontWeight: FontWeight.bold
+      ),),
+    );
   }
 
+  Widget _contacts(BuildContext context) {
 
+    return Flexible(
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: List.generate(16, (index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: CircleAvatar(
+              backgroundImage: ExactAssetImage(_contactsPic[index]),
+              radius: 30,
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
 }
