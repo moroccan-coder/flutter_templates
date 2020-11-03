@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_ui/profiles/profile2/provider.dart';
+import 'package:flutter_ui/profiles/profile2/user.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Profile2 extends StatefulWidget {
@@ -8,6 +12,8 @@ class Profile2 extends StatefulWidget {
 }
 
 class _Profile2State extends State<Profile2> {
+  Profile profile = ProfileProvider.getProfile();
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -16,21 +22,29 @@ class _Profile2State extends State<Profile2> {
       ),
       child: Stack(
         children: [
-          Image.asset("assets/profiles/back_bg2.jpg",fit: BoxFit.cover,height: MediaQuery.of(context).size.height * 0.44,),
+          Image.asset(
+            "assets/profiles/back_bg2.jpg",
+            fit: BoxFit.fill,
+            width: double.infinity,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.44,
+          ),
           Scaffold(
-           backgroundColor: Colors.transparent,
+            backgroundColor: Colors.transparent,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.bars),
-                onPressed: (){},
+                onPressed: () {},
               ),
             ),
-            
             body: Stack(
               children: [
                 _profileTitle(context),
+                _bodyContent(context),
               ],
             ),
           )
@@ -40,10 +54,12 @@ class _Profile2State extends State<Profile2> {
   }
 
   Widget _profileTitle(BuildContext context) {
-
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.05,
-       left: 0,
+        top: MediaQuery
+            .of(context)
+            .size
+            .height * 0.02,
+        left: 0,
         right: 0,
         child: Column(
           children: [
@@ -53,10 +69,7 @@ class _Profile2State extends State<Profile2> {
                 Container(
                   height: 94,
                   width: 94,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey.withOpacity(0.3)
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey.withOpacity(0.3)),
                 ),
                 Container(
                   height: 120,
@@ -71,8 +84,100 @@ class _Profile2State extends State<Profile2> {
                   backgroundImage: ExactAssetImage("assets/shared/yss.jpg"),
                 ),
               ],
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                profile.user.name,
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Text(
+              profile.user.adresse,
+              style: TextStyle(color: Colors.white70),
+            ),
           ],
         ));
   }
+
+  Widget _bodyContent(BuildContext context) {
+    return Positioned(
+        top: MediaQuery
+            .of(context)
+            .size
+            .height * 0.32,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                _counters(context),
+                _divider(),
+                ..._aboutMe(),
+              ],
+            ),
+          ),
+        ));
+  }
+
+
+  TextStyle _textStyle = TextStyle(
+    color: Colors.grey.shade500,
+  );
+
+  TextStyle _counterNumersStyle()
+  {
+    return TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+        color: Colors.grey.shade700
+    );
+  }
+
+  Widget _counters(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          children: [
+            Text("FOLLOWERS", style: _textStyle,),
+            SizedBox(height: 4,),
+            Text(profile.followers.toString(), style: _counterNumersStyle(),),
+          ],
+        ),
+        Column(
+          children: [
+            Text("FOLLOWING", style: _textStyle,),
+            SizedBox(height: 4,),
+            Text(profile.following.toString(), style: _counterNumersStyle()),
+          ],
+        ),
+        Column(
+          children: [
+            Text("FRIENDS", style: _textStyle,),
+            SizedBox(height: 4,),
+            Text(profile.friends.toString(), style: _counterNumersStyle()),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _divider() {
+    return Container(
+      margin: EdgeInsets.only(top: 8),
+      height: 1,
+      color: Colors.grey.shade200,
+    );
+  }
+
+  List<Widget>_aboutMe() {
+
+  }
+
+
 }
