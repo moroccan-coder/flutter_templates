@@ -10,6 +10,19 @@ class Profile1 extends StatefulWidget {
 
 class _Profile1State extends State<Profile1> {
   Profile profile1 = Profile1Provider.getProfile();
+  bool _visible = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 400),(){
+      setState(() {
+        _visible = true;
+      });
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +60,18 @@ class _Profile1State extends State<Profile1> {
                   painter: ProfilePainter(),
                   child: Container(),
                 ),
-                Positioned(
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 500),
                   top: MediaQuery.of(context).size.height * 0.22,
-                  left: MediaQuery.of(context).size.width * 0.04,
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: ExactAssetImage('assets/shared/yss.jpg'),
+                  left: _visible ? MediaQuery.of(context).size.width * 0.04 : 0,
+                  child: AnimatedOpacity(
+                    duration: Duration(milliseconds: 400),
+                    opacity: _visible ? 1 : 0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 30,
+                      backgroundImage: ExactAssetImage('assets/shared/yss.jpg'),
+                    ),
                   ),
                 ),
                 Positioned(
