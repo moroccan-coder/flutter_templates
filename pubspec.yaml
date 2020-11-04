@@ -50,6 +50,7 @@ flutter:
      - assets/profiles/
      - assets/shared/
      - assets/shared/persons/
+     - assets/shared/nature/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

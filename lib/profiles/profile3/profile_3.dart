@@ -10,6 +10,36 @@ class Profile3 extends StatefulWidget {
 class _Profile3State extends State<Profile3> {
   Profile profile3 = ProfileProvider.getProfile();
 
+ List<String> _photosList = [
+   'assets/shared/nature/nature3.jpg',
+   'assets/shared/nature/nature4.jpg',
+   'assets/shared/nature/nature5.jpg',
+   'assets/shared/nature/nature1.jpg',
+   'assets/shared/nature/nature2.jpg',
+   'assets/shared/nature/nature6.jpg',
+   'assets/shared/nature/nature7.jpg',
+   'assets/shared/nature/nature8.jpg',
+ ];
+
+  List<String> _contactsPic = [
+    "assets/shared/persons/pers1.jpg",
+    "assets/shared/persons/pers2.jpg",
+    "assets/shared/persons/pers3.jpg",
+    "assets/shared/persons/pers4.jpg",
+    "assets/shared/persons/pers5.jpg",
+    "assets/shared/persons/pers6.jpg",
+    "assets/shared/persons/pers7.jpg",
+    "assets/shared/persons/pers8.jpg",
+    "assets/shared/persons/pers9.jpg",
+    "assets/shared/persons/pers10.jpg",
+    "assets/shared/persons/pers11.jpg",
+    "assets/shared/persons/pers12.jpg",
+    "assets/shared/persons/pers13.jpg",
+    "assets/shared/persons/pers14.jpg",
+    "assets/shared/persons/pers15.jpg",
+    "assets/shared/persons/pers16.jpg",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -75,9 +105,44 @@ class _Profile3State extends State<Profile3> {
               _divider(),
               _counters(context),
               _divider(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text("PHOTOS (${profile3.photos.toString()})",style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey.shade700
+                ),),
+              ),
+              _photos(context),
+              ..._aboutMe(),
+              _friends(),
+              _contacts(context),
+
             ],
           ),
         ));
+  }
+
+  List<Widget> _aboutMe() {
+    return [
+      Padding(
+        padding: const EdgeInsets.only(top: 24,left: 16),
+        child: Text("ABOUT ME",
+            style: TextStyle(
+              color: Colors.grey.shade700,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 24),
+        child: Text(profile3.user.about,style: TextStyle(
+            fontSize: 16,color: Colors.grey.shade700
+
+        ),
+
+        ),
+      ),
+
+    ];
   }
 
   Widget _profileImage(BuildContext context) {
@@ -175,5 +240,64 @@ class _Profile3State extends State<Profile3> {
       height: 1,
       color: Colors.grey.shade200,
     );
+  }
+
+  Widget _photos(BuildContext context) {
+
+    return Container(
+      width: double.infinity,
+      height: 100,
+      child: ListView(
+        children: List.generate(_photosList.length, (index) {
+          return Container(
+            margin: EdgeInsets.only(left: 8,right: 8),
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: ExactAssetImage(_photosList[index]),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          );
+        }).toList(),
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+
+  }
+
+
+  Widget _friends(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+      child: Text('FRIENDS(${profile3.friends.toString()})',style: TextStyle(
+          color: Colors.grey.shade700,
+          fontWeight: FontWeight.bold
+      ),),
+    );
+  }
+
+  Widget _contacts(BuildContext context) {
+
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(bottom: 24),
+      height: 60,
+      child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: List.generate(_contactsPic.length, (index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: CircleAvatar(
+                backgroundImage: ExactAssetImage(_contactsPic[index]),
+                radius: 30,
+              ),
+            );
+          }).toList(),
+        ),
+    )
+    ;
   }
 }

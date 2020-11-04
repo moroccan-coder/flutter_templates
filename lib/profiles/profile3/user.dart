@@ -11,6 +11,7 @@ class Profile {
   int following;
   int followers;
   int friends;
+  int photos;
 
-  Profile({this.user, this.following, this.followers, this.friends});
+  Profile({this.user, this.following, this.followers, this.friends,this.photos});
 }
