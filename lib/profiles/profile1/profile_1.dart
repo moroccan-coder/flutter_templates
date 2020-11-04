@@ -41,14 +41,11 @@ class _Profile1State extends State<Profile1> {
               elevation: 0,
               centerTitle: true,
             ),
-
             body: Stack(
               children: [
                 CustomPaint(
                   painter: ProfilePainter(),
-                  child:Container(
-
-                  ),
+                  child: Container(),
                 ),
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.22,
@@ -65,32 +62,50 @@ class _Profile1State extends State<Profile1> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(profile1.user.name,style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        SizedBox(height: 8,),
-                        Row(children: [
-                          Icon(Icons.location_on,color: Colors.grey.shade400,size: 20,),
-                          Text(profile1.user.address),
-                        ],),
+                        Text(
+                          profile1.user.name,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.grey.shade400,
+                              size: 20,
+                            ),
+                            Text(profile1.user.address),
+                          ],
+                        ),
                         SizedBox(height: 32),
-                        Text("ABOUT ME",style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        SizedBox(height: 16,),
+                        Text(
+                          "ABOUT ME",
+                          style: TextStyle(
+                            color: Colors.grey.shade400,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
                         Container(
                             width: MediaQuery.of(context).size.width,
-                            child: Text(profile1.user.about,style: TextStyle(
-                              color: Colors.grey.shade800,
-                              fontSize: 16,
-                              height: 1.3,
-                              wordSpacing: 1.2,
-                            ),)),
-
+                            child: Text(
+                              profile1.user.about,
+                              style: TextStyle(
+                                color: Colors.grey.shade800,
+                                fontSize: 16,
+                                height: 1.3,
+                                wordSpacing: 1.2,
+                              ),
+                            )),
                       ],
                     )),
                 Positioned(
@@ -102,53 +117,60 @@ class _Profile1State extends State<Profile1> {
                       children: [
                         Column(
                           children: [
-                            Text("FOLLOWERS",style: _textStyle(),),
-                            SizedBox(height: 4,),
-                            Text(profile1.fllowers.toString(),style: _counterBotomStyle,),
+                            Text(
+                              "FOLLOWERS",
+                              style: _textStyle(),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              profile1.fllowers.toString(),
+                              style: _counterBotomStyle,
+                            ),
                           ],
                         ),
                         Column(
                           children: [
-                            Text("FOLLOWING",style: _textStyle(),),
-                            SizedBox(height: 4,),
-                            Text(profile1.fllowing.toString(),style: _counterBotomStyle),
+                            Text(
+                              "FOLLOWING",
+                              style: _textStyle(),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(profile1.fllowing.toString(), style: _counterBotomStyle),
                           ],
                         ),
                         Column(
                           children: [
-                            Text("FRIENDS",style: _textStyle(),),
-                            SizedBox(height: 4,),
-                            Text(profile1.friends.toString(),style: _counterBotomStyle),
+                            Text(
+                              "FRIENDS",
+                              style: _textStyle(),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(profile1.friends.toString(), style: _counterBotomStyle),
                           ],
                         ),
                       ],
-                    )
-
-                ),
-
+                    )),
               ],
             ),
-
           ),
-
         ],
       ),
     );
   }
 
-
-  TextStyle _textStyle(){
+  TextStyle _textStyle() {
     return TextStyle(
       color: Colors.grey.shade500,
     );
   }
 
-
-  TextStyle _counterBotomStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 18,
-      color: Colors.grey.shade700
-  );
+  TextStyle _counterBotomStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.grey.shade900);
 }
 
 class ProfilePainter extends CustomPainter {
@@ -164,14 +186,11 @@ class ProfilePainter extends CustomPainter {
 
     path.close();
     //canvas.clipPath(path);
-    canvas.drawPath(path,paint);
+    canvas.drawPath(path, paint);
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
-
-
-
 }

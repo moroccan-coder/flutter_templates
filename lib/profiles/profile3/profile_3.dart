@@ -66,7 +66,7 @@ class _Profile3State extends State<Profile3> {
               textAlign: TextAlign.center,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8,bottom: 16),
+                padding: const EdgeInsets.only(top: 8,bottom: 24),
                 child: Text(profile3.user.adresse,textAlign: TextAlign.center,style: TextStyle(
                   color: Colors.grey.shade800
                 ),),
@@ -116,7 +116,7 @@ class _Profile3State extends State<Profile3> {
   );
 
   TextStyle _counterNumersStyle() {
-    return TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.grey.shade700);
+    return TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.grey.shade900);
   }
 
   Widget _counters(BuildContext context) {

@@ -142,7 +142,7 @@ class _Profile2State extends State<Profile2> {
   );
 
   TextStyle _counterNumersStyle() {
-    return TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.grey.shade700);
+    return TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.grey.shade900);
   }
 
   Widget _counters(BuildContext context) {
