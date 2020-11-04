@@ -10,6 +10,8 @@ class Profile3 extends StatefulWidget {
 class _Profile3State extends State<Profile3> {
   Profile profile3 = ProfileProvider.getProfile();
 
+
+
  List<String> _photosList = [
    'assets/shared/nature/nature3.jpg',
    'assets/shared/nature/nature4.jpg',
@@ -39,6 +41,31 @@ class _Profile3State extends State<Profile3> {
     "assets/shared/persons/pers15.jpg",
     "assets/shared/persons/pers16.jpg",
   ];
+
+
+
+  bool _visible1 = false;
+  bool _visible2 = false;
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(Duration(milliseconds: 500),(){
+
+      setState(() {
+        _visible1 = true;
+      });
+
+    }).then((value) {
+      setState(() {
+        _visible2 = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,12 +173,18 @@ class _Profile3State extends State<Profile3> {
   }
 
   Widget _profileImage(BuildContext context) {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * 0.1 - 40,
+    return AnimatedPositioned(
+      duration: Duration(milliseconds: 600),
+      top: _visible1 ? MediaQuery.of(context).size.height * 0.1 - 40 : -100,
       right: MediaQuery.of(context).size.width / 2 - 40,
-      child: CircleAvatar(
-        radius: 40,
-        backgroundImage: ExactAssetImage("assets/shared/yss.jpg"),
+      child: AnimatedOpacity(
+        duration: Duration(milliseconds: 800),
+        opacity: _visible1 ? 1 : 0,
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 40,
+          backgroundImage: ExactAssetImage("assets/shared/yss.jpg"),
+        ),
       ),
     );
   }
@@ -187,49 +220,53 @@ class _Profile3State extends State<Profile3> {
   Widget _counters(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Text(
-                "FOLLOWERS",
-                style: _textStyle,
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                profile3.followers.toString(),
-                style: _counterNumersStyle(),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                "FOLLOWING",
-                style: _textStyle,
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(profile3.following.toString(), style: _counterNumersStyle()),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                "FRIENDS",
-                style: _textStyle,
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(profile3.friends.toString(), style: _counterNumersStyle()),
-            ],
-          ),
-        ],
+      child: AnimatedOpacity(
+        duration: Duration(milliseconds: 500),
+        opacity: _visible2 ? 1 : 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Text(
+                  "FOLLOWERS",
+                  style: _textStyle,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  profile3.followers.toString(),
+                  style: _counterNumersStyle(),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  "FOLLOWING",
+                  style: _textStyle,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(profile3.following.toString(), style: _counterNumersStyle()),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  "FRIENDS",
+                  style: _textStyle,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(profile3.friends.toString(), style: _counterNumersStyle()),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
